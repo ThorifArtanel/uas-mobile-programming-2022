@@ -33,6 +33,7 @@ public class FragmentDua extends Fragment implements SensorEventListener {
     private SensorManager sm;
     private Sensor senAccel;
     private boolean isLifted;
+    private boolean resetLift =  true;
 
 
     ArrayList<Accel> alAccel = new ArrayList<>();
@@ -108,8 +109,12 @@ public class FragmentDua extends Fragment implements SensorEventListener {
         }
 
 
-        if  (ay>=2) {
+        if  (ay>=1 && resetLift) {
             isLifted = true;
+            resetLift = false;
+        }
+        if  (ay<=1 && !isLifted) {
+            resetLift = true;
         }
         if (isLifted) {
             isLifted = false;
